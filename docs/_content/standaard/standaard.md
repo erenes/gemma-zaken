@@ -529,6 +529,24 @@ op `true` zetten.
 Indien de laatste gebruiksrechten op een informatieobject verwijderd worden,
 dan MOET de indicatie weer op `null` gezet worden.
 
+#### Archiveren
+
+**Vernietigen van informatieobjecten**
+
+Bij `DELETE` requests op informatieobjecten MOETEN het informatieobject en 
+gerelateerde objecten fysiek uit de opslag verwijderd worden indien er geen 
+relaties meer zijn met andere objecten via objectinformatieobject.
+
+Indien er nog relaties zijn moet een 400 worden teruggegeven.
+
+Soft-deletes zijn NIET TOEGESTAAN.
+
+Onder gerelateerde objecten wordt begrepen:
+
+- `gebruiksrechten` - de gebruiksrechten die horen bij het informatieobject.
+
+TODO: [#791](https://github.com/VNG-Realisatie/gemma-zaken/issues/791)
+
 ## Besluitregistratiecomponent
 
 Besluitregistratiecomponenten (BRC) MOETEN aan twee aspecten voldoen:
@@ -588,6 +606,18 @@ status code, MOET het BRC antwoorden met een `HTTP 400` foutbericht.
 Er MOET gevalideerd worden dat de combinatie `besluit` en `informatieobject`
 niet eerder voorkomt. Indien deze al bestaat, dan MOET het BRC antwoorden met
 een `HTTP 400` foutbericht.
+
+#### Archiveren
+
+**Vernietigen van besluiten**
+
+Bij `DELETE` requests op besluiten MOET het bestluit fysiek uit de opslag 
+verwijderd worden indien er geen relaties meer zijn met andere objecten via 
+besluitinformatieobject.
+
+Indien er nog relaties zijn moet een 400 worden teruggegeven. (TODO)
+
+Soft-deletes zijn NIET TOEGESTAAN.
 
 ## Zaaktypecatalogus
 
